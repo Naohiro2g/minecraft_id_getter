@@ -2,8 +2,8 @@ import sys
 import zipfile
 import glob
 from pathlib import Path
-from utils import get_version, get_jar_path
-from utils import is_version_1_21_or_later
+from get_id_utils import get_version, get_jar_path
+from get_id_utils import is_version_1_21_or_later
 
 
 def extract_entity_ids(minecraft_jar_path, minecraft_dir, version):
