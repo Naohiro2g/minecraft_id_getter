@@ -12,7 +12,7 @@ MinecraftのブロックIDとエンティティIDのリストを取得するツ�
   指定されたMinecraftバージョンのJARファイルからブロックIDを抽出し、Pythonファイル（例：`block_1_21_4.py`）として保存します。Minecraft 1.13 以降のバージョンに対応しています。
 - **`get_entity_id.py`:**
   指定されたMinecraftバージョンのJARファイルからエンティティIDを抽出し、Pythonファイル（例：`entity_1_21_4.py`）として保存します。Minecraft 1.13 以降のバージョンに対応しています。
-- **`utils.py`:**
+- **`get_id_utils.py`:**
   各スクリプトで使用される共通関数（バージョンの取得、JARファイルのパス取得、バージョンの判定など）をまとめたユーティリティファイルです。
 - **`block_1_12_2.py`**: Minecraft 1.12.2 のブロックIDリスト(手動で追加したファイル)。
 - **`entity_1_12_2.py`**: Minecraft 1.12.2 のエンティティIDリスト(手動で追加したファイル)。
@@ -27,7 +27,7 @@ block_1_12_2.pyとentity_1_12_2.pyは、手動で作成されたものです。�
 
 2. **スクリプトの実行:**
 
-    以下のコマンドを実行して、ブロックIDまたはエンティティIDのリストを生成します。`utils.py`も一緒に配置してください。
+    以下のコマンドを実行して、ブロックIDまたはエンティティIDのリストを生成します。`get_id_utils.py`も一緒に配置してください。
 
     ```bash
     python get_block_id.py <Minecraft version>
