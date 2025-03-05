@@ -4,12 +4,20 @@ Tools to get lists of Minecraft block IDs and entity IDs
 
 ## Description
 
-This repository contains Python scripts to automatically generate lists of block and entity IDs for specific Minecraft versions. These lists are saved as Python files, where each ID is represented as a constant.
+This repository contains Python scripts to automatically generate lists of block and entity IDs for specific Minecraft versions. These lists are saved as Python files, where each ID is represented as a constant. This tool was primarily prepared for the minecraft_remote project, but it can also be widely used for mod development, data analysis, and other situations where Minecraft IDs are needed. [=> minecraft_remote project](https://github.com/Naohiro2g/minecraft_remote)
 
-## Scripts
+## Files and Features
 
-- `get_block_id.py`: Extracts block IDs from a specified Minecraft version's JAR file and saves them to a Python file (e.g., `block_1_21_4.py`).
-- `get_entity_id.py`: Extracts entity IDs from a specified Minecraft version's JAR file and saves them to a Python file (e.g., `entity_1_21_4.py`).
+- **`get_block_id.py`:**
+  Extracts block IDs from a specified Minecraft version's JAR file and saves them to a Python file (e.g., `block_1_21_4.py`). This script supports Minecraft version 1.13 and later.
+- **`get_entity_id.py`:**
+  Extracts entity IDs from a specified Minecraft version's JAR file and saves them to a Python file (e.g., `entity_1_21_4.py`). This script supports Minecraft version 1.13 and later.
+- **`utils.py`:**
+  Contains utility functions used by the other scripts, such as getting the Minecraft version, obtaining the JAR file path, and checking version compatibility.
+- **`block_1_12_2.py`**: Block ID list for Minecraft 1.12.2 (manually added file).
+- **`entity_1_12_2.py`**: Entity ID list for Minecraft 1.12.2 (manually added file).
+
+`block_1_12_2.py` and `entity_1_12_2.py` are manually created. Be careful not to delete them accidentally.
 
 ## Usage
 
@@ -17,27 +25,55 @@ This repository contains Python scripts to automatically generate lists of block
     - Python 3.11 or later.
     - A Minecraft installation with the desired version.
 
-2. **Run the scripts:**
+2. **Running the Scripts:**
+
+    Use the following commands to generate the block ID or entity ID lists. Make sure `utils.py` is in the same directory.
 
     ```bash
     python get_block_id.py <Minecraft version>
     python get_entity_id.py <Minecraft version>
     ```
 
-    Replace `<Minecraft version>` with the actual version (e.g., `1.21.4`).
+    Replace `<Minecraft version>` with the actual version (e.g., `1.21.4`, `1.19.2`, `1.13.2`).
 
-    Example:
+    **Note:**
+    - `get_block_id.py` and `get_entity_id.py` do not support Minecraft versions earlier than 1.13. Please use the separately prepared files (`block_1_12_2.py` and `entity_1_12_2.py`).
+    - If the jar file is not found, an error will be returned. Launch Minecraft and download the jar file for that version.
+
+    **Examples:**
 
     ```bash
-    python get_block_id.py 1.21.4
-    python get_entity_id.py 1.21.4
+    python get_block_id.py 1.21.4  # Generate the block ID list for Minecraft 1.21.4
+    python get_entity_id.py 1.21.4 # Generate the entity ID list for Minecraft 1.21.4
     ```
 
 3. **Output:**
-    - The scripts will create files named `block_<version>.py` and `entity_<version>.py` in the same directory as the scripts.
-    - These files will contain the block and entity IDs as Python constants.
 
-## Example Output (block_1_21_4.py)
+    - After running the scripts, `block_<version>.py` and `entity_<version>.py` files will be created in the same directory.
+    - These files contain the block and entity IDs as Python constants.
+
+    **Example File Names:**
+
+    - `block_1_21_4.py`: Block ID list for Minecraft 1.21.4
+    - `block_1_19_2.py`: Block ID list for Minecraft 1.19.2
+    - `entity_1_21_4.py`: Entity ID list for Minecraft 1.21.4
+
+    **Usage example**
+
+    If you use it from other Python files, you can use it by importing it as follows.
+
+    ```python
+    import block_1_21_4 as block
+    import entity_1_21_4 as entity
+
+    #example
+    mc.setBlock(x, y, z, block.SEA_LANTERN) # sea_lantern
+    mc.spawnEntity(x, y, z, entity.CREEPER) # creeper
+    ```
+
+## Example Output
+
+### block_1_21_4.py
 
 ```python
 # Block ID list of Minecraft 1.21.4
@@ -46,10 +82,13 @@ This repository contains Python scripts to automatically generate lists of block
 ACACIA_BUTTON = "acacia_button"
 ACACIA_DOOR = "acacia_door"
 ACACIA_FENCE = "acacia_fence"
+ACACIA_FENCE_GATE = "acacia_fence_gate"
+ACACIA_LEAVES = "acacia_leaves"
+ACACIA_LOG = "acacia_log"
 # ... other block IDs ...
 ```
 
-## Example Output (entity_1_21_4.py)
+### entity_1_21_4.py
 
 ```python
 # Entity ID list of Minecraft 1.21.4
@@ -58,5 +97,8 @@ ACACIA_FENCE = "acacia_fence"
 ALLAY = "allay"
 ARMADILLO = "armadillo"
 ARMOR_STAND = "armor_stand"
+AXOLOTL = "axolotl"
+BAT = "bat"
+BEE = "bee"
 # ... other entity IDs ...
 ```
