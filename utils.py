@@ -28,3 +28,13 @@ def is_version_1_13_or_later(version: str) -> bool:
     if major == 1 and minor < 13:
         return False
     return True
+
+
+def is_version_1_21_or_later(version: str) -> bool:
+    """Check if the Minecraft version is 1.21 or later"""
+    major, minor, _patch = map(int, version.split("."))
+    if major < 1:
+        return False
+    if major == 1 and minor < 21:
+        return False
+    return True

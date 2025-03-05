@@ -2,7 +2,8 @@ import sys
 import zipfile
 import glob
 from pathlib import Path
-from utils import get_version, get_jar_path, is_version_1_13_or_later
+from utils import get_version, get_jar_path
+from utils import is_version_1_13_or_later
 
 
 def extract_block_ids(minecraft_jar_path, minecraft_dir, version):

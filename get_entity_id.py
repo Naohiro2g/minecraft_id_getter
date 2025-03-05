@@ -3,6 +3,7 @@ import zipfile
 import glob
 from pathlib import Path
 from utils import get_version, get_jar_path
+from utils import is_version_1_21_or_later
 
 
 def extract_entity_ids(minecraft_jar_path, minecraft_dir, version):
@@ -16,7 +17,11 @@ def extract_entity_ids(minecraft_jar_path, minecraft_dir, version):
         sys.exit(1)
 
     entity_names = []
-    entity_path = extracted_path / "data/minecraft/loot_table/entities"
+    if is_version_1_21_or_later(version):
+        entity_path = extracted_path / "data/minecraft/loot_table/entities"
+    else:
+        entity_path = extracted_path / "data/minecraft/loot_tables/entities"
+
     json_files = glob.glob(str(entity_path / "*.json"))
 
     for file_path in json_files:
