@@ -20,8 +20,17 @@ def get_jar_path(version: str) -> Path:
     return minecraft_dir / "versions" / version / f"{version}.jar"
 
 
+def normalize_version(version: str) -> str:
+    """Normalize the version string to ensure it has three components"""
+    parts = version.split(".")
+    while len(parts) < 3:
+        parts.append("0")
+    return ".".join(parts)
+
+
 def is_version_1_13_or_later(version: str) -> bool:
     """Check if the Minecraft version is 1.13 or later"""
+    version = normalize_version(version)
     major, minor, _patch = map(int, version.split("."))
     if major < 1:
         return False
@@ -32,6 +41,7 @@ def is_version_1_13_or_later(version: str) -> bool:
 
 def is_version_1_21_or_later(version: str) -> bool:
     """Check if the Minecraft version is 1.21 or later"""
+    version = normalize_version(version)
     major, minor, _patch = map(int, version.split("."))
     if major < 1:
         return False
