@@ -3,7 +3,7 @@ import zipfile
 import glob
 from pathlib import Path
 from get_id_utils import get_version, get_jar_path
-from get_id_utils import is_version_1_21_or_later
+from get_id_utils import is_version_1_xx_or_later
 
 
 def extract_entity_ids(minecraft_jar_path, minecraft_dir, version):
@@ -17,7 +17,7 @@ def extract_entity_ids(minecraft_jar_path, minecraft_dir, version):
         sys.exit(1)
 
     entity_names = []
-    if is_version_1_21_or_later(version):
+    if is_version_1_xx_or_later(version, xx=21):
         entity_path = extracted_path / "data/minecraft/loot_table/entities"
     else:
         entity_path = extracted_path / "data/minecraft/loot_tables/entities"
@@ -49,14 +49,20 @@ def main():
     version_path = version.replace(".", "_")
     minecraft_jar_path = get_jar_path(version)
 
-    entity_names = extract_entity_ids(
-        minecraft_jar_path, Path(minecraft_jar_path).parent, version
-    )
-    script_dir = Path(__file__).resolve().parent
-    file_name = f"entity_{version_path}.py"
-    output_file = script_dir / file_name
-    save_to_file(entity_names, output_file, version, version_path)
-    print(f"Entity names list has been saved to:\n{output_file}.")
+    if is_version_1_xx_or_later(version, xx=13):
+        entity_names = extract_entity_ids(
+            minecraft_jar_path, Path(minecraft_jar_path).parent, version
+        )
+        script_dir = Path(__file__).resolve().parent
+        output_dir = script_dir / "ID_list_files"
+        output_dir.mkdir(exist_ok=True)
+        file_name = f"entity_{version_path}.py"
+        output_file = output_dir / file_name
+        save_to_file(entity_names, output_file, version, version_path)
+        print(f"Entity names list has been saved to:\n{output_file}.")
+    else:
+        print("Error: This script only supports Minecraft version 1.13 and above.")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

@@ -4,20 +4,25 @@ Tools to get lists of Minecraft block IDs and entity IDs
 
 ## Description
 
-This repository contains Python scripts to automatically generate lists of block and entity IDs for specific Minecraft versions. These lists are saved as Python files, where each ID is represented as a constant. This tool was primarily prepared for the minecraft_remote project, but it can also be widely used for mod development, data analysis, and other situations where Minecraft IDs are needed. [=> minecraft_remote project](https://github.com/Naohiro2g/minecraft_remote)
+This repository contains Python scripts to automatically generate lists of block, entity, and particle IDs for specific Minecraft versions. These lists are saved as Python files, where each ID is represented as a constant. This tool was primarily prepared for the minecraft_remote project, but it can also be widely used for mod development, data analysis, and other situations where Minecraft IDs are needed. [=> minecraft_remote project](https://github.com/Naohiro2g/minecraft_remote)
 
 ## Files and Features
 
 - **`get_block_id.py`:**
-  Extracts block IDs from a specified Minecraft version's JAR file and saves them to a Python file (e.g., `block_1_21_4.py`). This script supports Minecraft version 1.13 and later.
+  Extracts block IDs from a specified Minecraft version's JAR file and saves them to a Python file (e.g., `block_1_21_4.py`) in the `/ID_list_files/` directory. This script supports Minecraft version 1.13 and later.
 - **`get_entity_id.py`:**
-  Extracts entity IDs from a specified Minecraft version's JAR file and saves them to a Python file (e.g., `entity_1_21_4.py`). This script supports Minecraft version 1.13 and later.
+  Extracts entity IDs from a specified Minecraft version's JAR file and saves them to a Python file (e.g., `entity_1_21_4.py`) in the `/ID_list_files/` directory. This script supports Minecraft version 1.13 and later.
+- **`get_particle_id.py`:**
+  Extracts particle IDs from a specified Minecraft version's JAR file and saves them to a Python file (e.g., `particle_1_21_4.py`) in the `/ID_list_files/` directory. This script supports Minecraft version 1.14 and later.
 - **`get_id_utils.py`:**
   Contains utility functions used by the other scripts, such as getting the Minecraft version, obtaining the JAR file path, and checking version compatibility.
+
+==== in the `/ID_list_files/` directory, the following files are available.
+
 - **`block_1_12_2.py`**: Block ID list for Minecraft 1.12.2 (manually added file).
 - **`entity_1_12_2.py`**: Entity ID list for Minecraft 1.12.2 (manually added file).
 
-`block_1_12_2.py` and `entity_1_12_2.py` are manually created. Be careful not to delete them accidentally.
+`block_1_12_2.py`, and `entity_1_12_2.py` are manually created files. The IDs in these files are integers like 41 up to version 1.12.2, and strings like GOLD_BLOCK from version 1.13 onwards, so they are not compatible. Be careful not to delete them by mistake.
 
 ## Usage
 
@@ -32,6 +37,7 @@ This repository contains Python scripts to automatically generate lists of block
     ```bash
     python get_block_id.py <Minecraft version>
     python get_entity_id.py <Minecraft version>
+    python get_particle_id.py <Minecraft version>
     ```
 
     Replace `<Minecraft version>` with the actual version (e.g., `1.21.4`, `1.19.2`, `1.13.2`).
@@ -45,18 +51,20 @@ This repository contains Python scripts to automatically generate lists of block
     ```bash
     python get_block_id.py 1.21.4  # Generate the block ID list for Minecraft 1.21.4
     python get_entity_id.py 1.21.4 # Generate the entity ID list for Minecraft 1.21.4
+    python get_particle_id.py 1.21.4 # Generate the particle ID list for Minecraft 1.21.4
     ```
 
 3. **Output:**
 
-    - After running the scripts, `block_<version>.py` and `entity_<version>.py` files will be created in the same directory.
-    - These files contain the block and entity IDs as Python constants.
+    - After running the scripts, `block_<version>.py`, `entity_<version>.py` and `particle_<version>` files will be created in the same directory.
+    - These files contain the block, entity, and particle IDs as Python constants.
 
     **Example File Names:**
 
     - `block_1_21_4.py`: Block ID list for Minecraft 1.21.4
     - `block_1_19_2.py`: Block ID list for Minecraft 1.19.2
     - `entity_1_21_4.py`: Entity ID list for Minecraft 1.21.4
+    - `particle_1_16_5.py`: Particle ID list for Minecraft 1.16.5
 
     **Usage example**
 
@@ -65,10 +73,12 @@ This repository contains Python scripts to automatically generate lists of block
     ```python
     import block_1_21_4 as block
     import entity_1_21_4 as entity
+    import particle_1_16_5 as particle
 
     #example
     mc.setBlock(x, y, z, block.SEA_LANTERN) # sea_lantern
     mc.spawnEntity(x, y, z, entity.CREEPER) # creeper
+    mc.spawnParticle(x, y, z, particle.DRAGON_BREATH, x1, y1, z1, speed, count) # dragon_breath
     ```
 
 ## Example Output

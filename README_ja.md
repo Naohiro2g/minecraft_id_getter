@@ -4,20 +4,25 @@ MinecraftのブロックIDとエンティティIDのリストを取得するツ�
 
 ## 説明
 
-このリポジトリには、特定のMinecraftバージョンに対応したブロックIDとエンティティIDのリストを自動的に生成するPythonスクリプトが含まれています。生成されたリストはPythonファイルとして保存され、各IDは定数として表現されます。このツールは、主にminecraft_remoteプロジェクト（マイクラリモコン）のために準備されたものですが、ひろくmod開発やデータ分析など、Minecraft IDが必要な場面で利用できます。[=> minecraft_remoteプロジェクト](https://github.com/Naohiro2g/minecraft_remote/README_ja.md)
+このリポジトリには、特定のMinecraftバージョンに対応したブロックID、エンティティID、パーティクルIDのリストを自動的に生成するPythonスクリプトが含まれています。生成されたリストはPythonファイルとして保存され、各IDは定数として表現されます。このツールは、主にminecraft_remoteプロジェクト（マイクラリモコン）のために準備されたものですが、ひろくmod開発やデータ分析など、Minecraft IDが必要な場面で利用できます。[=> minecraft_remoteプロジェクト](https://github.com/Naohiro2g/minecraft_remote/README_ja.md)
 
 ## ファイルと機能
 
 - **`get_block_id.py`:**
-  指定されたMinecraftバージョンのJARファイルからブロックIDを抽出し、Pythonファイル（例：`block_1_21_4.py`）として保存します。Minecraft 1.13 以降のバージョンに対応しています。
+  指定されたMinecraftバージョンのJARファイルからブロックIDを抽出し、/ID_list_files/にPythonファイル（例：`block_1_21_4.py`）として保存します。Minecraft **1.13** 以降のバージョンに対応しています。
 - **`get_entity_id.py`:**
-  指定されたMinecraftバージョンのJARファイルからエンティティIDを抽出し、Pythonファイル（例：`entity_1_21_4.py`）として保存します。Minecraft 1.13 以降のバージョンに対応しています。
+  指定されたMinecraftバージョンのJARファイルからエンティティIDを抽出し、/ID_list_files/にPythonファイル（例：`entity_1_21_4.py`）として保存します。Minecraft **1.13** 以降のバージョンに対応しています。
+- **`get_particle_id.py`:**
+  指定されたMinecraftバージョンのJARファイルからパーティクルIDを抽出し、/ID_list_files/にPythonファイル（例：`particle_1_21_4.py`）として保存します。Minecraft **1.14** 以降のバージョンに対応しています。
 - **`get_id_utils.py`:**
   各スクリプトで使用される共通関数（バージョンの取得、JARファイルのパス取得、バージョンの判定など）をまとめたユーティリティファイルです。
+
+==== `/ID_list_files/` には以下のファイルがあります。
+
 - **`block_1_12_2.py`**: Minecraft 1.12.2 のブロックIDリスト(手動で追加したファイル)。
 - **`entity_1_12_2.py`**: Minecraft 1.12.2 のエンティティIDリスト(手動で追加したファイル)。
 
-block_1_12_2.pyとentity_1_12_2.pyは、手動で作成されたものです。誤って削除しないように注意してください。
+block_1_12_2.pyとentity_1_12_2.pyは、手動で作成されたものです。これらのファイルのIDは、1.12.2までは41のような整数値、1.13以降ではGOLD_BLOCKのような文字列で構成されているので、互換性がありません。誤って削除しないように注意してください。
 
 ## 使用方法
 
@@ -32,12 +37,14 @@ block_1_12_2.pyとentity_1_12_2.pyは、手動で作成されたものです。�
     ```bash
     python get_block_id.py <Minecraft version>
     python get_entity_id.py <Minecraft version>
+    python get_particle_id.py <Minecraft version>
     ```
 
     `<Minecraft version>` には、実際のバージョン（例：`1.21.4`、`1.19.2`、`1.13.2`）を入力します。
 
     **注意:**
     - `get_block_id.py`、`get_entity_id.py`共にMinecraft 1.13 未満のバージョンには対応していません。別に用意したファイル(`block_1_12_2.py`、`entity_1_12_2.py`)を利用してください。
+    - `get_particle_id.py`はMinecraft 1.13 未満のバージョンには対応していません。
     - もしjarファイルが見つからない場合、エラーを返します。Minecraftを起動してそのバージョンのjarファイルをダウンロードしてください。
 
     **実行例:**
@@ -49,7 +56,7 @@ block_1_12_2.pyとentity_1_12_2.pyは、手動で作成されたものです。�
 
 3. **出力:**
 
-    - スクリプトが実行されると、スクリプトと同じディレクトリに `block_<version>.py` および `entity_<version>.py` というファイルが作成されます。
+    - スクリプトが実行されると、スクリプトと同じ階層の/ID_list_files/ディレクトリ内に `block_<version>.py`、`entity_<version>.py`、`particle_<version>.py` というファイルが作成されます。
     - これらのファイルには、Python定数としてブロックIDおよびエンティティIDが保存されています。
 
     **ファイル名の例:**
@@ -68,6 +75,7 @@ block_1_12_2.pyとentity_1_12_2.pyは、手動で作成されたものです。�
 
     mc.setBlock(x, y, z, block.SEA_LANTERN) # sea_lantern
     mc.spawnEntity(x, y, z, entity.CREEPER) # cpeerer
+    mc.spawnParticle(x, y, z, particle.DRAGON_BREATH, x1, y1, z1, speed, count) # dragon_breath
     ```
 
 ## 出力例

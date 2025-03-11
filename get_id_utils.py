@@ -1,3 +1,4 @@
+import sys
 import platform
 import argparse
 from pathlib import Path
@@ -17,7 +18,14 @@ def get_jar_path(version: str) -> Path:
         minecraft_dir = Path.home() / "AppData" / "Roaming" / ".minecraft"
     else:
         minecraft_dir = Path.home() / ".minecraft"
-    return minecraft_dir / "versions" / version / f"{version}.jar"
+
+    jar_path = minecraft_dir / "versions" / version / f"{version}.jar"
+
+    if not jar_path.exists():
+        print(f"Error: Minecraft is not installed at {minecraft_dir}")
+        sys.exit(1)
+
+    return jar_path
 
 
 def normalize_version(version: str) -> str:
@@ -28,23 +36,12 @@ def normalize_version(version: str) -> str:
     return ".".join(parts)
 
 
-def is_version_1_13_or_later(version: str) -> bool:
-    """Check if the Minecraft version is 1.13 or later"""
+def is_version_1_xx_or_later(version: str, xx: int) -> bool:
+    """Check if the Minecraft version is 1.xx or later"""
     version = normalize_version(version)
     major, minor, _patch = map(int, version.split("."))
     if major < 1:
         return False
-    if major == 1 and minor < 13:
-        return False
-    return True
-
-
-def is_version_1_21_or_later(version: str) -> bool:
-    """Check if the Minecraft version is 1.21 or later"""
-    version = normalize_version(version)
-    major, minor, _patch = map(int, version.split("."))
-    if major < 1:
-        return False
-    if major == 1 and minor < 21:
+    if major == 1 and minor < xx:
         return False
     return True

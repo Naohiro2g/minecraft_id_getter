@@ -2,8 +2,7 @@ import sys
 import zipfile
 import glob
 from pathlib import Path
-from get_id_utils import get_version, get_jar_path
-from get_id_utils import is_version_1_13_or_later
+from get_id_utils import get_version, get_jar_path, is_version_1_xx_or_later
 
 
 def extract_block_ids(minecraft_jar_path, minecraft_dir, version):
@@ -41,17 +40,19 @@ def main():
     version_path = version.replace(".", "_")
     minecraft_jar_path = get_jar_path(version)
 
-    if is_version_1_13_or_later(version):
+    if is_version_1_xx_or_later(version, xx=13):
         block_id_list = extract_block_ids(
             minecraft_jar_path, Path(minecraft_jar_path).parent, version
         )
         script_dir = Path(__file__).resolve().parent
+        output_dir = script_dir / "ID_list_files"
+        output_dir.mkdir(exist_ok=True)
         file_name = f"block_{version_path}.py"
-        output_file = script_dir / file_name
+        output_file = output_dir / file_name
         save_to_file(block_id_list, output_file, version, version_path)
         print(f"Block IDs have been written to:\n{output_file}")
     else:
-        print("This version is not supported.")
+        print("Error: This script only supports Minecraft version 1.13 and above.")
         sys.exit(1)
 
 
