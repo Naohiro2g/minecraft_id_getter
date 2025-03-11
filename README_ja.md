@@ -14,6 +14,8 @@ MinecraftのブロックIDとエンティティIDのリストを取得するツ�
   指定されたMinecraftバージョンのJARファイルからエンティティIDを抽出し、/ID_list_files/にPythonファイル（例：`entity_1_21_4.py`）として保存します。Minecraft **1.13** 以降のバージョンに対応しています。
 - **`get_particle_id.py`:**
   指定されたMinecraftバージョンのJARファイルからパーティクルIDを抽出し、/ID_list_files/にPythonファイル（例：`particle_1_21_4.py`）として保存します。Minecraft **1.14** 以降のバージョンに対応しています。
+- **`get_all_utils.py`:**
+  全てのIDリストを一括で生成するスクリプトです。ブロックID、エンティティID、パーティクルIDのリストを生成します。
 - **`get_id_utils.py`:**
   各スクリプトで使用される共通関数（バージョンの取得、JARファイルのパス取得、バージョンの判定など）をまとめたユーティリティファイルです。
 
@@ -38,6 +40,9 @@ block_1_12_2.pyとentity_1_12_2.pyは、手動で作成されたものです。�
     python get_block_id.py <Minecraft version>
     python get_entity_id.py <Minecraft version>
     python get_particle_id.py <Minecraft version>
+
+    python get_all_id.py <Minecraft version>  # ブロックID、エンティティID、パーティクルIDのリストを一括で生成
+
     ```
 
     `<Minecraft version>` には、実際のバージョン（例：`1.21.4`、`1.19.2`、`1.13.2`）を入力します。
