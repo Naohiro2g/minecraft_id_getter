@@ -19,7 +19,7 @@ This repository contains Python scripts to automatically generate lists of block
 - **`get_id_utils.py`:**
   Contains utility functions used by the other scripts, such as getting the Minecraft version, obtaining the JAR file path, and checking version compatibility.
 
-==== in the `/ID_list_files/` directory, the following files are available.
+==== in the `/ID_list_files_1.12.2/` directory, the following files are available.
 
 - **`block_1_12_2.py`**: Block ID list for Minecraft 1.12.2 (manually added file).
 - **`entity_1_12_2.py`**: Entity ID list for Minecraft 1.12.2 (manually added file).
